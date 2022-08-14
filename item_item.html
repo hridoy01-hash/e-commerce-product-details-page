@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primaryColor: #c1a59a;
+            --secondaryColor: #1e272e;
+            --themeFont: "Poppins";
+        }
+
+        .s050F_universal * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--themeFont);
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .s050F_container {
+            max-width: 1340px;
+            margin: 0 auto;
+            padding: 0px 20px;
+        }
+
+        /* breadcumb style */
+        .s050F_product_details_breadcumb_main_wrapper {
+            width: 100%;
+            background-color: rgba(30, 39, 46, 0.05);
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .s050F_breadcumb_sub_menu {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+
+        .s050F_breadcumb_menu {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(30, 39, 46, 40%);
+            padding: 30px 0px;
+        }
+
+        /* product display img area */
+        .s050F_product_details_content_wrapper {
+            padding-top: 40px;
+        }
+
+        .s050F_product_details_img_wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 320px;
+            max-width: 320px;
+            margin: auto;
+        }
+
+        .s050F_display_img_wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(30, 39, 46, 5%);
+        }
+
+        .s050F_display_img_wrapper img {
+            display: block;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .s050F_related_img_wrapper {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            position: relative;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        /* .s050F_related_img_wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+            grid-gap: 10px;
+            margin-top: 15px;
+            position: relative;
+            width: 100%;
+            overflow-x: auto;
+        } */
+
+
+
+        .s050F_active_related_img::after {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background-color: rgba(30, 39, 46, 0.2) !important;
+            z-index: 3;
+            top: 0;
+        }
+
+        .s050F_related_img {
+            min-width: 56px;
+            min-height: 56px;
+            height: 56px;
+            width: 56px;
+            background-color: rgba(30, 39, 46, 5%);
+            position: relative;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .s050F_overlay_and_icon_wrapper {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(30, 39, 46, 30%);
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .s050F_related_img img {
+            display: block;
+            height: 100%;
+            width: 100%;
+
+        }
+
+        /* product info area */
+        .s050F_product_info_main_wrapper {
+            margin-top: 30px;
+        }
+
+        .s050F_product_type_wrapper {
+            color: rgba(30, 39, 46, 50%);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .s050F_product_name_wrapper {
+            font-size: 14px;
+            color: var(--secondaryColor);
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .s050F_product_rating {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .s050A_product_price_wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 30px;
+        }
+
+        .s050A_product_old_price_wrapper {
+            position: relative;
+            display: flex;
+            width: fit-content;
+        }
+
+        .s0501_old_price_text {
+            color: rgba(30, 39, 46, 50%);
+        }
+
+        .s050A_new_price_text {
+            color: var(--primaryColor);
+        }
+
+        .s050A_delete_product::after {
+            content: "";
+            height: 2px;
+            width: 100%;
+            background-color: rgba(30, 39, 46, 50%);
+            position: absolute;
+            left: 0;
+            top: 46%;
+        }
+
+        .s050F_product_info_variation_section_area_wrapper {
+            margin-bottom: 30px;
+            margin-top: 30px;
+        }
+
+        .s050F_select_variation_title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--secondaryColor);
+        }
+
+        .s050F_selection_btn_wrapper {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .s050F_selection_btn {
+            padding: 4.5px 8px;
+            font-size: 10px;
+            font-weight: 500;
+            border: 1px solid rgba(30, 39, 46, 5%);
+        }
+
+        .s050F_active_selction_variation {
+            background-color: var(--primaryColor);
+            color: white;
+        }
+
+        .s050F_All_btn_area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .s050F_product_shipment_day_wrapper {
+            margin-top: 10px;
+            margin-bottom: 30px;
+            font-size: 12px;
+            color: var(--secondaryColor);
+            font-weight: 400;
+        }
+
+        .s050F_return_policy {
+            margin-right: 5px;
+        }
+
+        .s050F_shipment_days {
+            margin-left: 5px;
+        }
+
+
+
+        .s050F_add_to_cart_btn {
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            padding: 7px 20px;
+            border: none;
+            background-color: var(--primaryColor);
+            transition: all .3s ease-in-out;
+        }
+
+        .s050F_add_to_cart_btn:hover {
+            background-color: var(--secondaryColor);
+        }
+
+        .s050F_add_wishlist_btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 31px;
+            height: 31px;
+            background-color: transparent;
+            border: 1px solid rgba(30, 39, 46, 0.05);
+        }
+
+        .s050F_active_wishlist_btn svg path {
+            fill: var(--primaryColor);
+        }
+
+        .s050F_share_via_icon_wrapper {
+            margin-top: 10px;
+        }
+
+        .s050F_share_via_icon_list .s050F_share_via_icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .s050F_share_via_text {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--secondaryColor);
+        }
+
+        .s050F_share_via_icon_list {
+            display: flex;
+            list-style: none;
+            gap: 26px;
+        }
+
+        /* product info review and botton area */
+        .s050F_product_details_bottom_wrapper {
+            padding-top: 70px;
+        }
+
+        .s050F_review_description_btn_wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .s050F_review_description_btn {
+            border: none;
+            background-color: transparent;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(30, 39, 46, 30%);
+        }
+
+        .s050F_active_s050F_review_description_btn {
+            color: var(--primaryColor) !important;
+        }
+
+
+        /* product details bottom area */
+
+        .s050F_review_section_main_wrapper {
+            padding-bottom: 70px;
+        }
+
+        .s050F_client_review_top_area_wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .s050F_rating {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .s050F_rating li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .s050F_rating_wrapper {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .s050F_given_review {
+            font-size: 24px;
+            font-weight: 600;
+            color: rgba(30, 39, 46, 100%);
+        }
+
+        .s050F_out_of {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(30, 39, 46, 60%);
+        }
+
+        .s050F_total_review_count {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(30, 39, 46, 50%);
+        }
+
+        /* client reivew area style */
+        .s050F_client_given_rating {
+            display: flex;
+            list-style: none;
+            gap: 3px;
+            align-items: center;
+        }
+
+        .s050F_client_given_rating_wrapper {
+            margin-bottom: 5px;
+        }
+
+        .s050F_client_name_wrapper {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .s050F_client_name {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(30, 39, 46, 50%);
+        }
+
+        .s050F_client_feedback_wrapper {
+            display: flex;
+            font-size: 12px;
+            color: rgba(30, 39, 46, 70%);
+        }
+
+        .s050F_client_review_wrapper {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(30, 39, 46, 5%);
+        }
+
+        .s050F_client_review_wrapper:last-child {
+            padding-bottom: 0px;
+            border-bottom: 0px solid rgba(30, 39, 46, 5%);
+        }
+
+        .s050F_client_review_wrapper:first-child {
+            padding-top: 0px;
+        }
+
+        /* product description */
+        .s050F_product_description_main_wrapper {
+            display: none;
+        }
+
+        /* ---------------video popup section style------------ */
+        .s050F_video_popup_wrapper {
+            position: fixed;
+            background: #1e272ee8;
+            width: 100%;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px 0;
+            justify-content: center;
+            align-items: center;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all .3s ease-in-out;
+        }
+
+        .s050F_active_video_popup_wrapper {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .s050F_video_popup {
+            height: 100px;
+            width: 100px;
+            border: 1px solid white;
+            margin-bottom: 10px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @media screen and (min-width:640px) {
+
+            /* breadcumb style */
+
+            .s050F_breadcumb_sub_menu {
+                gap: 6px;
+            }
+
+            .s050F_breadcumb_menu {
+                font-size: 14px;
+                padding: 40px 0px;
+            }
+
+            /* product display img style */
+            .s050F_product_details_content_wrapper {
+                padding-top: 70px;
+            }
+
+            .s050F_product_details_img_wrapper {
+                min-height: 510px;
+                max-width: 510px;
+            }
+
+            .s050F_display_img_wrapper img {
+                display: block;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            .s050F_related_img_wrapper {
+                display: flex;
+                gap: 15px;
+                margin-top: 15px;
+                position: relative;
+            }
+
+            .s050F_related_img {
+                min-width: 90px;
+                min-height: 90px;
+                width: 90px;
+                height: 90px;
+                background-color: rgba(30, 39, 46, 5%);
+                position: relative;
+            }
+
+            /* product info area */
+            .s050F_product_info_main_wrapper {
+                margin-top: 40px;
+            }
+
+            .s050F_product_type_wrapper {
+                font-size: 12px;
+            }
+
+            .s050F_rating li svg {
+                height: 20px;
+                width: 20px;
+            }
+
+            .s050F_client_given_rating li svg {
+                height: 15px;
+                width: 15px;
+            }
+
+            .s050F_rating_start svg {
+                height: 15px;
+                width: 15px;
+            }
+
+            .s050F_product_name_wrapper {
+                font-size: 22px;
+            }
+
+            .s050A_product_price_wrapper {
+                font-size: 16px;
+                font-weight: 600;
+                margin-top: 40px;
+            }
+
+            .s050F_select_variation_title {
+                font-size: 14px;
+            }
+
+            .s050F_selection_btn_wrapper {
+                gap: 15px;
+                margin-top: 15px;
+            }
+
+            .s050F_selection_btn {
+                padding: 5px 8px;
+                font-size: 12px;
+                font-weight: 500;
+                border: 1px solid rgba(30, 39, 46, 5%);
+                cursor: pointer;
+                line-height: 11px;
+            }
+
+            .s050F_product_info_variation_section_area_wrapper {
+                margin-bottom: 40px;
+                margin-top: 40px;
+            }
+
+            .s050F_All_btn_area {
+                gap: 20px;
+            }
+
+            .s050F_product_shipment_day_wrapper {
+                margin-top: 15px;
+                margin-bottom: 40px;
+                font-size: 13px;
+            }
+
+            .s050F_return_policy {
+                margin-right: 10px;
+            }
+
+            .s050F_shipment_days {
+                margin-left: 10px;
+            }
+
+            .s050F_add_to_cart_btn {
+                font-size: 14px;
+                padding: 8px 20px;
+                cursor: pointer;
+            }
+
+            .s050F_add_wishlist_btn {
+                width: 36px;
+                height: 36px;
+                cursor: pointer;
+            }
+
+            .s050F_share_via_text {
+                font-size: 14px;
+            }
+
+            .s050F_share_via_icon_list .s050F_share_via_icon {
+                display: flex;
+                height: 15px;
+                width: 15px;
+            }
+
+            .s050F_share_via_icon_list {
+                gap: 33px;
+            }
+
+            /* product info review and botton area */
+
+            .s050F_product_details_bottom_wrapper {
+                padding-top: 80px;
+            }
+
+            .s050F_review_section_main_wrapper {
+                padding-bottom: 80px;
+            }
+
+            .s050F_client_review_top_area_wrapper {
+                margin-bottom: 40px;
+            }
+
+            .s050F_rating_wrapper {
+                margin-top: 8px;
+                margin-bottom: 10px;
+            }
+
+            .s050F_given_review {
+                font-size: 26px;
+            }
+
+            .s050F_out_of {
+                font-size: 14px;
+                font-weight: 600;
+                color: rgba(30, 39, 46, 60%);
+            }
+
+            /* client reivew area style */
+
+            .s050F_client_given_rating_wrapper {
+                margin-bottom: 10px;
+            }
+
+            .s050F_client_name_wrapper {
+                margin-bottom: 15px;
+            }
+
+            .s050F_client_name {
+                font-size: 14px;
+            }
+
+            .s050F_client_feedback_wrapper {
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+            .s050F_client_review_wrapper {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+
+        }
+
+        @media screen and (min-width:1025px) {
+
+            /* breadcumb style */
+            .s050F_breadcumb_menu {
+                padding: 60px 0px;
+            }
+
+            /* product info and img area style */
+            .s050F_product_details_top_area_wrapper {
+                display: flex;
+                gap: 35px;
+            }
+
+            .s050F_product_info_main_wrapper {
+                margin-top: 0px;
+            }
+
+            .s050F_product_details_content_wrapper {
+                padding-top: 100px;
+            }
+
+            /* product details bottom area */
+
+            .s050F_product_details_bottom_wrapper {
+                padding-top: 100px;
+            }
+
+            .s050F_review_description_btn_wrapper {
+                margin-bottom: 40px;
+            }
+
+            .s050F_review_section_main_wrapper {
+                padding-bottom: 100px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <section class="s050F_product_details_main_wrapper s050F_universal">
+
+        <!-- product details breadcumb -->
+        <div class="s050F_product_details_breadcumb_main_wrapper">
+            <div class="s050F_breadcumb_sub_menu_wrapper">
+                <ul class="s050F_breadcumb_sub_menu">
+                    <li class="s050F_breadcumb_menu">Home</li> <span class="s050F_breadcumb_menu">|</span>
+                    <li class="s050F_breadcumb_menu">All Items</li> <span class="s050F_breadcumb_menu">|</span>
+                    <li class="s050F_breadcumb_menu">Standmon Wing...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- product details content wrapper -->
+        <div class="s050F_container">
+            <div class="s050F_product_details_content_wrapper">
+
+                <!-- product details top area  -->
+                <div class="s050F_product_details_top_area_wrapper">
+
+                    <!-- product image area -->
+                    <div class="s050F_product_details_img_wrapper">
+                        <div class="s050F_display_img_wrapper">
+                            <img src="images/1cb8928ec9a0e261f75c6a8b962586e0.png" alt="">
+                        </div>
+                        <div class="s050F_related_img_wrapper">
+                            <div class="s050F_related_img s050F_active_related_img">
+                                <img src="images/1cb8928ec9a0e261f75c6a8b962586e0.png" alt="">
+                            </div>
+                            <div class="s050F_related_img">
+                                <img src="images/1cb8928ec9a0e261f75c6a8b962586e0.png" alt="">
+                            </div>
+                            <div class="s050F_related_img">
+                                <img src="images/1cb8928ec9a0e261f75c6a8b962586e0.png" alt="">
+                            </div>
+                            <div class="s050F_related_img">
+                                <img src="images/1cb8928ec9a0e261f75c6a8b962586e0.png" alt="">
+                            </div>
+                            <div class="s050F_related_img">
+                                <img src="images/1cb8928ec9a0e261f75c6a8b962586e0.png" alt="">
+                            </div>
+                            <div class="s050F_related_img">
+                                <img src="images/1cb8928ec9a0e261f75c6a8b962586e0.png" alt="">
+                            </div>
+
+                            <div class="s050F_related_img">
+                                <img src="images/1cb8928ec9a0e261f75c6a8b962586e0.png" alt="">
+                            </div>
+                            <div class="s050F_related_img">
+                                <img src="images/1cb8928ec9a0e261f75c6a8b962586e0.png" alt="">
+                                <div class="s050F_overlay_and_icon_wrapper">
+                                    <span><svg class="cx_1632983997891_video_icon" xmlns="http://www.w3.org/2000/svg"
+                                            width="14.056" height="16.471" viewBox="0 0 14.056 16.471">
+                                            <path id="Play-icon"
+                                                d="M8.143,1.429a1,1,0,0,1,1.715,0l7.234,12.056A1,1,0,0,1,16.234,15H1.766a1,1,0,0,1-.857-1.514Z"
+                                                transform="translate(15 -0.765) rotate(90)" fill="#ffcc14"></path>
+                                        </svg></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- video popup area section -->
+                    <div class="s050F_video_popup_wrapper">
+                        <div class="s050F_video_popup">
+
+                        </div>
+                        <span><svg id="cx_1632983997891_cross_frame" xmlns="http://www.w3.org/2000/svg" width="28.284"
+                                height="28.284" viewBox="0 0 28.284 28.284">
+                                <path id="Cross"
+                                    d="M10,0A10,10,0,1,0,20,10,10,10,0,0,0,10,0Zm0,18.333A8.333,8.333,0,1,1,18.333,10,8.333,8.333,0,0,1,10,18.333ZM14.167,10a.833.833,0,0,1-.833.833h-2.5v2.5a.833.833,0,0,1-1.667,0v-2.5h-2.5a.833.833,0,1,1,0-1.667h2.5v-2.5a.833.833,0,1,1,1.667,0v2.5h2.5A.833.833,0,0,1,14.167,10Z"
+                                    transform="translate(14.142) rotate(45)" fill="#ffff"></path>
+                            </svg></span>
+                    </div>
+
+                    <!-- product info arae -->
+                    <div class="s050F_product_info_main_wrapper">
+                        <!-- product info top area -->
+                        <div class="s050F_product_info_top_area">
+                            <div class="s050F_product_type_wrapper">
+                                <span class="s050F_product_type">Chair</span>
+                            </div>
+                            <div class="s050F_product_name_wrapper">
+                                <span class="s050F_product_name">Strandmon Wing Chair </span>
+                            </div>
+                            <div class="s050F_product_rating_wrapper">
+                                <ul class="s050F_product_rating">
+                                    <li class="s050F_rating_start"><svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                            height="13" viewBox="0 0 13 13">
+                                            <path id="Star"
+                                                d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                transform="translate(-54 -64)" fill="#ffc312" />
+                                        </svg>
+                                    </li>
+                                    <li class="s050F_rating_start"><svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                            height="13" viewBox="0 0 13 13">
+                                            <path id="Star"
+                                                d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                transform="translate(-54 -64)" fill="#ffc312" />
+                                        </svg>
+                                    </li>
+                                    <li class="s050F_rating_start"><svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                            height="13" viewBox="0 0 13 13">
+                                            <path id="Star"
+                                                d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                transform="translate(-54 -64)" fill="#ffc312" />
+                                        </svg>
+                                    </li>
+                                    <li class="s050F_rating_start"><svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                            height="13" viewBox="0 0 13 13">
+                                            <path id="Star"
+                                                d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                transform="translate(-54 -64)" fill="#ffc312" />
+                                        </svg>
+                                    </li>
+                                    <li class="s050F_rating_start"><svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                            height="13" viewBox="0 0 13 13">
+                                            <path id="Star"
+                                                d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                transform="translate(-54 -64)" fill="#ffc312" />
+                                        </svg>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="s050A_product_price_wrapper">
+                                <div class="s050A_product_old_price_wrapper">
+                                    <span class="s0501_old_price_text s050A_delete_product">BDT 8000</span>
+                                </div>
+                                <div class="s050A_product_new_price_wrapper">
+                                    <span class="s050A_new_price_text">BDT 3000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- select variation area -->
+                        <div class="s050F_product_info_variation_section_area_wrapper">
+                            <div class="s050F_select_variation_title_wrapper">
+                                <span class="s050F_select_variation_title">Select Variation</span>
+                            </div>
+                            <div class="s050F_selection_btn_wrapper">
+                                <span class="s050F_selection_btn s050F_active_selction_variation">Wood | White</span>
+                                <span class="s050F_selection_btn">Wood | Browane</span>
+                                <span class="s050F_selection_btn">Wood | Light</span>
+                                <span class="s050F_selection_btn">Wood | White</span>
+                                <span class="s050F_selection_btn">Wood | Browone</span>
+                                <span class="s050F_selection_btn">Wood | Pink</span>
+                                <span class="s050F_selection_btn">Wood | Light</span>
+                                <span class="s050F_selection_btn">Wood | White</span>
+                                <span class="s050F_selection_btn">Wood | Browone</span>
+                            </div>
+                        </div>
+
+                        <!-- propduct info botttomn area -->
+                        <div class="s050F_product_info_bottom_area_wrapper">
+                            <div class="s050F_All_btn_area">
+                                <div class="s050F_add_to_cart_btn_wrapper">
+                                    <button class="s050F_add_to_cart_btn">Add To Cart</button>
+                                </div>
+                                <div class="s050F_add_wishlist_btn_wrapper s050F_active_wishlist_btn">
+                                    <button class="s050F_add_wishlist_btn"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="14" height="13.056" viewBox="0 0 14 13.056">
+                                            <g id="heart_1_" data-name="heart (1)" transform="translate(0.005 -0.917)"
+                                                fill="none">
+                                                <path
+                                                    d="M10.2.917A3.732,3.732,0,0,0,7,2.841,3.732,3.732,0,0,0,3.788.917,3.965,3.965,0,0,0,0,5.028c0,3.95,6.388,8.513,6.66,8.707L7,13.973l.337-.238c.272-.192,6.66-4.756,6.66-8.707A3.965,3.965,0,0,0,10.2.917Z"
+                                                    stroke="none" />
+                                                <path
+                                                    d="M 3.801831245422363 1.917491912841797 C 2.191958427429199 2.003457069396973 0.9363069534301758 3.375541687011719 0.9972324371337891 4.990097045898438 L 0.9979429244995117 5.027807235717773 C 0.9979429244995117 7.65534496307373 4.78956413269043 11.12081146240234 6.994125366210938 12.74328517913818 C 7.516543865203857 12.35460472106934 8.803104400634766 11.35848617553711 10.05100250244141 10.08934688568115 C 11.97515296936035 8.132427215576172 12.99220275878906 6.382176399230957 12.99220275878906 5.027807235717773 L 12.99291324615479 4.990097045898438 C 13.0538387298584 3.375541687011719 11.79818725585938 2.003457069396973 10.18831443786621 1.917491912841797 C 9.224031448364258 1.94289493560791 8.337762832641602 2.480332374572754 7.870002746582031 3.325467109680176 L 6.995062828063965 4.90623664855957 L 6.120142936706543 3.325456619262695 C 5.652392387390137 2.480332374572754 4.766114234924316 1.94289493560791 3.801831245422363 1.917491912841797 M 3.788052558898926 0.916996955871582 C 5.124523162841797 0.9377870559692383 6.347812652587891 1.671756744384766 6.995072841644287 2.841206550598145 C 7.642343044281006 1.671756744384766 8.865623474121094 0.9377870559692383 10.20209312438965 0.916996955871582 C 12.38103294372559 1.011667251586914 14.07444286346436 2.848357200622559 13.99220275878906 5.027807235717773 C 13.99220275878906 8.978277206420898 7.603822708129883 13.54214668273926 7.33210277557373 13.7345666885376 L 6.995072841644287 13.97305679321289 L 6.658042907714844 13.7345666885376 C 6.386322975158691 13.54098701477051 -0.002057075500488281 8.978277206420898 -0.002057075500488281 5.027807235717773 C -0.08429718017578125 2.848357200622559 1.609112739562988 1.011667251586914 3.788052558898926 0.916996955871582 Z"
+                                                    stroke="none" fill="#1e272e" />
+                                            </g>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="s050F_product_shipment_day_wrapper">
+                                <span class="s050F_return_policy">7 Days Return</span>| <span
+                                    class="s050F_shipment_days"> 1-5 Days Shipment</span>
+                            </div>
+
+                            <div class="s050F_share_area_wrapper">
+                                <div class="s050F_share_via_text_wrapper">
+                                    <span class="s050F_share_via_text">Share Via</span>
+                                </div>
+                                <div class="s050F_share_via_icon_wrapper">
+                                    <ul class="s050F_share_via_icon_list">
+                                        <li class="s050F_share_via_icon"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="15.824" height="15.824" viewBox="0 0 15.824 15.824">
+                                                <path id="Path_1688" data-name="Path 1688"
+                                                    d="M-.016-9.712a3.987,3.987,0,0,0-2.048.552,4.169,4.169,0,0,0-1.5,1.5,3.958,3.958,0,0,0-.56,2.056,4,4,0,0,0,.552,2.056,4.088,4.088,0,0,0,1.5,1.5A4.044,4.044,0,0,0-.008-1.5a4,4,0,0,0,2.056-.552,4.106,4.106,0,0,0,1.5-1.5A4,4,0,0,0,4.1-5.608a4,4,0,0,0-.552-2.056,4.106,4.106,0,0,0-1.5-1.5A4.016,4.016,0,0,0-.016-9.712Zm0,6.64a2.462,2.462,0,0,1-1.272-.344,2.58,2.58,0,0,1-.928-.928A2.462,2.462,0,0,1-2.56-5.616,2.42,2.42,0,0,1-2.216-6.88a2.6,2.6,0,0,1,.928-.92A2.462,2.462,0,0,1-.016-8.144,2.462,2.462,0,0,1,1.256-7.8a2.6,2.6,0,0,1,.928.92,2.42,2.42,0,0,1,.344,1.264,2.462,2.462,0,0,1-.344,1.272,2.58,2.58,0,0,1-.928.928A2.462,2.462,0,0,1-.016-3.072ZM3.344-13.52h-6.72a4.419,4.419,0,0,0-2.288.624A4.5,4.5,0,0,0-7.312-11.24,4.464,4.464,0,0,0-7.92-8.96v6.7A4.464,4.464,0,0,0-7.312.024,4.5,4.5,0,0,0-5.664,1.68,4.419,4.419,0,0,0-3.376,2.3h6.72a4.5,4.5,0,0,0,2.3-.624A4.6,4.6,0,0,0,7.28.048a4.5,4.5,0,0,0,.624-2.3v-6.7a4.5,4.5,0,0,0-.624-2.3A4.6,4.6,0,0,0,5.648-12.9,4.5,4.5,0,0,0,3.344-13.52ZM6.336-2.256a2.939,2.939,0,0,1-.4,1.5A2.957,2.957,0,0,1,4.848.336a2.939,2.939,0,0,1-1.5.4h-6.72a2.9,2.9,0,0,1-1.5-.4A2.976,2.976,0,0,1-5.952-.752a2.939,2.939,0,0,1-.4-1.5v-6.7a2.939,2.939,0,0,1,.4-1.5,2.976,2.976,0,0,1,1.08-1.088,2.9,2.9,0,0,1,1.5-.4h6.72a2.939,2.939,0,0,1,1.5.4,2.957,2.957,0,0,1,1.088,1.088,2.939,2.939,0,0,1,.4,1.5ZM4.16-10.912a1.047,1.047,0,0,0-.768.32,1.047,1.047,0,0,0-.32.768,1.021,1.021,0,0,0,.32.76,1.061,1.061,0,0,0,.768.312,1.034,1.034,0,0,0,.76-.312,1.034,1.034,0,0,0,.312-.76,1.061,1.061,0,0,0-.312-.768A1.021,1.021,0,0,0,4.16-10.912Z"
+                                                    transform="translate(7.92 13.52)" fill="#c1a59a" />
+                                            </svg>
+                                        </li>
+                                        <li class="s050F_share_via_icon"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="15.824" height="15.824" viewBox="0 0 15.824 15.824">
+                                                <path id="Path_1688" data-name="Path 1688"
+                                                    d="M-.016-9.712a3.987,3.987,0,0,0-2.048.552,4.169,4.169,0,0,0-1.5,1.5,3.958,3.958,0,0,0-.56,2.056,4,4,0,0,0,.552,2.056,4.088,4.088,0,0,0,1.5,1.5A4.044,4.044,0,0,0-.008-1.5a4,4,0,0,0,2.056-.552,4.106,4.106,0,0,0,1.5-1.5A4,4,0,0,0,4.1-5.608a4,4,0,0,0-.552-2.056,4.106,4.106,0,0,0-1.5-1.5A4.016,4.016,0,0,0-.016-9.712Zm0,6.64a2.462,2.462,0,0,1-1.272-.344,2.58,2.58,0,0,1-.928-.928A2.462,2.462,0,0,1-2.56-5.616,2.42,2.42,0,0,1-2.216-6.88a2.6,2.6,0,0,1,.928-.92A2.462,2.462,0,0,1-.016-8.144,2.462,2.462,0,0,1,1.256-7.8a2.6,2.6,0,0,1,.928.92,2.42,2.42,0,0,1,.344,1.264,2.462,2.462,0,0,1-.344,1.272,2.58,2.58,0,0,1-.928.928A2.462,2.462,0,0,1-.016-3.072ZM3.344-13.52h-6.72a4.419,4.419,0,0,0-2.288.624A4.5,4.5,0,0,0-7.312-11.24,4.464,4.464,0,0,0-7.92-8.96v6.7A4.464,4.464,0,0,0-7.312.024,4.5,4.5,0,0,0-5.664,1.68,4.419,4.419,0,0,0-3.376,2.3h6.72a4.5,4.5,0,0,0,2.3-.624A4.6,4.6,0,0,0,7.28.048a4.5,4.5,0,0,0,.624-2.3v-6.7a4.5,4.5,0,0,0-.624-2.3A4.6,4.6,0,0,0,5.648-12.9,4.5,4.5,0,0,0,3.344-13.52ZM6.336-2.256a2.939,2.939,0,0,1-.4,1.5A2.957,2.957,0,0,1,4.848.336a2.939,2.939,0,0,1-1.5.4h-6.72a2.9,2.9,0,0,1-1.5-.4A2.976,2.976,0,0,1-5.952-.752a2.939,2.939,0,0,1-.4-1.5v-6.7a2.939,2.939,0,0,1,.4-1.5,2.976,2.976,0,0,1,1.08-1.088,2.9,2.9,0,0,1,1.5-.4h6.72a2.939,2.939,0,0,1,1.5.4,2.957,2.957,0,0,1,1.088,1.088,2.939,2.939,0,0,1,.4,1.5ZM4.16-10.912a1.047,1.047,0,0,0-.768.32,1.047,1.047,0,0,0-.32.768,1.021,1.021,0,0,0,.32.76,1.061,1.061,0,0,0,.768.312,1.034,1.034,0,0,0,.76-.312,1.034,1.034,0,0,0,.312-.76,1.061,1.061,0,0,0-.312-.768A1.021,1.021,0,0,0,4.16-10.912Z"
+                                                    transform="translate(7.92 13.52)" fill="#c1a59a" />
+                                            </svg>
+                                        </li>
+                                        <li class="s050F_share_via_icon"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="15.824" height="15.824" viewBox="0 0 15.824 15.824">
+                                                <path id="Path_1688" data-name="Path 1688"
+                                                    d="M-.016-9.712a3.987,3.987,0,0,0-2.048.552,4.169,4.169,0,0,0-1.5,1.5,3.958,3.958,0,0,0-.56,2.056,4,4,0,0,0,.552,2.056,4.088,4.088,0,0,0,1.5,1.5A4.044,4.044,0,0,0-.008-1.5a4,4,0,0,0,2.056-.552,4.106,4.106,0,0,0,1.5-1.5A4,4,0,0,0,4.1-5.608a4,4,0,0,0-.552-2.056,4.106,4.106,0,0,0-1.5-1.5A4.016,4.016,0,0,0-.016-9.712Zm0,6.64a2.462,2.462,0,0,1-1.272-.344,2.58,2.58,0,0,1-.928-.928A2.462,2.462,0,0,1-2.56-5.616,2.42,2.42,0,0,1-2.216-6.88a2.6,2.6,0,0,1,.928-.92A2.462,2.462,0,0,1-.016-8.144,2.462,2.462,0,0,1,1.256-7.8a2.6,2.6,0,0,1,.928.92,2.42,2.42,0,0,1,.344,1.264,2.462,2.462,0,0,1-.344,1.272,2.58,2.58,0,0,1-.928.928A2.462,2.462,0,0,1-.016-3.072ZM3.344-13.52h-6.72a4.419,4.419,0,0,0-2.288.624A4.5,4.5,0,0,0-7.312-11.24,4.464,4.464,0,0,0-7.92-8.96v6.7A4.464,4.464,0,0,0-7.312.024,4.5,4.5,0,0,0-5.664,1.68,4.419,4.419,0,0,0-3.376,2.3h6.72a4.5,4.5,0,0,0,2.3-.624A4.6,4.6,0,0,0,7.28.048a4.5,4.5,0,0,0,.624-2.3v-6.7a4.5,4.5,0,0,0-.624-2.3A4.6,4.6,0,0,0,5.648-12.9,4.5,4.5,0,0,0,3.344-13.52ZM6.336-2.256a2.939,2.939,0,0,1-.4,1.5A2.957,2.957,0,0,1,4.848.336a2.939,2.939,0,0,1-1.5.4h-6.72a2.9,2.9,0,0,1-1.5-.4A2.976,2.976,0,0,1-5.952-.752a2.939,2.939,0,0,1-.4-1.5v-6.7a2.939,2.939,0,0,1,.4-1.5,2.976,2.976,0,0,1,1.08-1.088,2.9,2.9,0,0,1,1.5-.4h6.72a2.939,2.939,0,0,1,1.5.4,2.957,2.957,0,0,1,1.088,1.088,2.939,2.939,0,0,1,.4,1.5ZM4.16-10.912a1.047,1.047,0,0,0-.768.32,1.047,1.047,0,0,0-.32.768,1.021,1.021,0,0,0,.32.76,1.061,1.061,0,0,0,.768.312,1.034,1.034,0,0,0,.76-.312,1.034,1.034,0,0,0,.312-.76,1.061,1.061,0,0,0-.312-.768A1.021,1.021,0,0,0,4.16-10.912Z"
+                                                    transform="translate(7.92 13.52)" fill="#c1a59a" />
+                                            </svg>
+                                        </li>
+                                        <li class="s050F_share_via_icon"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="15.824" height="15.824" viewBox="0 0 15.824 15.824">
+                                                <path id="Path_1688" data-name="Path 1688"
+                                                    d="M-.016-9.712a3.987,3.987,0,0,0-2.048.552,4.169,4.169,0,0,0-1.5,1.5,3.958,3.958,0,0,0-.56,2.056,4,4,0,0,0,.552,2.056,4.088,4.088,0,0,0,1.5,1.5A4.044,4.044,0,0,0-.008-1.5a4,4,0,0,0,2.056-.552,4.106,4.106,0,0,0,1.5-1.5A4,4,0,0,0,4.1-5.608a4,4,0,0,0-.552-2.056,4.106,4.106,0,0,0-1.5-1.5A4.016,4.016,0,0,0-.016-9.712Zm0,6.64a2.462,2.462,0,0,1-1.272-.344,2.58,2.58,0,0,1-.928-.928A2.462,2.462,0,0,1-2.56-5.616,2.42,2.42,0,0,1-2.216-6.88a2.6,2.6,0,0,1,.928-.92A2.462,2.462,0,0,1-.016-8.144,2.462,2.462,0,0,1,1.256-7.8a2.6,2.6,0,0,1,.928.92,2.42,2.42,0,0,1,.344,1.264,2.462,2.462,0,0,1-.344,1.272,2.58,2.58,0,0,1-.928.928A2.462,2.462,0,0,1-.016-3.072ZM3.344-13.52h-6.72a4.419,4.419,0,0,0-2.288.624A4.5,4.5,0,0,0-7.312-11.24,4.464,4.464,0,0,0-7.92-8.96v6.7A4.464,4.464,0,0,0-7.312.024,4.5,4.5,0,0,0-5.664,1.68,4.419,4.419,0,0,0-3.376,2.3h6.72a4.5,4.5,0,0,0,2.3-.624A4.6,4.6,0,0,0,7.28.048a4.5,4.5,0,0,0,.624-2.3v-6.7a4.5,4.5,0,0,0-.624-2.3A4.6,4.6,0,0,0,5.648-12.9,4.5,4.5,0,0,0,3.344-13.52ZM6.336-2.256a2.939,2.939,0,0,1-.4,1.5A2.957,2.957,0,0,1,4.848.336a2.939,2.939,0,0,1-1.5.4h-6.72a2.9,2.9,0,0,1-1.5-.4A2.976,2.976,0,0,1-5.952-.752a2.939,2.939,0,0,1-.4-1.5v-6.7a2.939,2.939,0,0,1,.4-1.5,2.976,2.976,0,0,1,1.08-1.088,2.9,2.9,0,0,1,1.5-.4h6.72a2.939,2.939,0,0,1,1.5.4,2.957,2.957,0,0,1,1.088,1.088,2.939,2.939,0,0,1,.4,1.5ZM4.16-10.912a1.047,1.047,0,0,0-.768.32,1.047,1.047,0,0,0-.32.768,1.021,1.021,0,0,0,.32.76,1.061,1.061,0,0,0,.768.312,1.034,1.034,0,0,0,.76-.312,1.034,1.034,0,0,0,.312-.76,1.061,1.061,0,0,0-.312-.768A1.021,1.021,0,0,0,4.16-10.912Z"
+                                                    transform="translate(7.92 13.52)" fill="#c1a59a" />
+                                            </svg>
+                                        </li>
+                                        <li class="s050F_share_via_icon"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="15.824" height="15.824" viewBox="0 0 15.824 15.824">
+                                                <path id="Path_1688" data-name="Path 1688"
+                                                    d="M-.016-9.712a3.987,3.987,0,0,0-2.048.552,4.169,4.169,0,0,0-1.5,1.5,3.958,3.958,0,0,0-.56,2.056,4,4,0,0,0,.552,2.056,4.088,4.088,0,0,0,1.5,1.5A4.044,4.044,0,0,0-.008-1.5a4,4,0,0,0,2.056-.552,4.106,4.106,0,0,0,1.5-1.5A4,4,0,0,0,4.1-5.608a4,4,0,0,0-.552-2.056,4.106,4.106,0,0,0-1.5-1.5A4.016,4.016,0,0,0-.016-9.712Zm0,6.64a2.462,2.462,0,0,1-1.272-.344,2.58,2.58,0,0,1-.928-.928A2.462,2.462,0,0,1-2.56-5.616,2.42,2.42,0,0,1-2.216-6.88a2.6,2.6,0,0,1,.928-.92A2.462,2.462,0,0,1-.016-8.144,2.462,2.462,0,0,1,1.256-7.8a2.6,2.6,0,0,1,.928.92,2.42,2.42,0,0,1,.344,1.264,2.462,2.462,0,0,1-.344,1.272,2.58,2.58,0,0,1-.928.928A2.462,2.462,0,0,1-.016-3.072ZM3.344-13.52h-6.72a4.419,4.419,0,0,0-2.288.624A4.5,4.5,0,0,0-7.312-11.24,4.464,4.464,0,0,0-7.92-8.96v6.7A4.464,4.464,0,0,0-7.312.024,4.5,4.5,0,0,0-5.664,1.68,4.419,4.419,0,0,0-3.376,2.3h6.72a4.5,4.5,0,0,0,2.3-.624A4.6,4.6,0,0,0,7.28.048a4.5,4.5,0,0,0,.624-2.3v-6.7a4.5,4.5,0,0,0-.624-2.3A4.6,4.6,0,0,0,5.648-12.9,4.5,4.5,0,0,0,3.344-13.52ZM6.336-2.256a2.939,2.939,0,0,1-.4,1.5A2.957,2.957,0,0,1,4.848.336a2.939,2.939,0,0,1-1.5.4h-6.72a2.9,2.9,0,0,1-1.5-.4A2.976,2.976,0,0,1-5.952-.752a2.939,2.939,0,0,1-.4-1.5v-6.7a2.939,2.939,0,0,1,.4-1.5,2.976,2.976,0,0,1,1.08-1.088,2.9,2.9,0,0,1,1.5-.4h6.72a2.939,2.939,0,0,1,1.5.4,2.957,2.957,0,0,1,1.088,1.088,2.939,2.939,0,0,1,.4,1.5ZM4.16-10.912a1.047,1.047,0,0,0-.768.32,1.047,1.047,0,0,0-.32.768,1.021,1.021,0,0,0,.32.76,1.061,1.061,0,0,0,.768.312,1.034,1.034,0,0,0,.76-.312,1.034,1.034,0,0,0,.312-.76,1.061,1.061,0,0,0-.312-.768A1.021,1.021,0,0,0,4.16-10.912Z"
+                                                    transform="translate(7.92 13.52)" fill="#c1a59a" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- product details bottom area -->
+                <div class="s050F_product_details_bottom_wrapper">
+
+                    <!-- review and description btn area -->
+                    <div class="s050F_review_description_btn_wrapper">
+                        <button class="s050F_review_description_btn">Description</button>
+                        <button
+                            class="s050F_review_description_btn s050F_active_s050F_review_description_btn">Review</button>
+                    </div>
+
+                    <!-- client review section -->
+                    <div class="s050F_review_section_main_wrapper">
+                        <div class="s050F_client_review_top_area_wrapper">
+                            <div class="s050F_total_client_review_wrapper">
+                                <p class="s050F_given_review">4.5<span class="s050F_out_of">/5</span></p>
+                            </div>
+                            <div class="s050F_rating_wrapper">
+                                <ul class="s050F_rating">
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                            viewBox="0 0 17 17">
+                                            <path id="Star"
+                                                d="M62.5,77.666,67.753,81l-1.39-6.289L71,70.482l-6.113-.552L62.5,64l-2.388,5.929L54,70.482l4.637,4.229L57.247,81Z"
+                                                transform="translate(-54 -64)" fill="#ffc312" />
+                                        </svg>
+
+                                    </li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                            viewBox="0 0 17 17">
+                                            <path id="Star"
+                                                d="M62.5,77.666,67.753,81l-1.39-6.289L71,70.482l-6.113-.552L62.5,64l-2.388,5.929L54,70.482l4.637,4.229L57.247,81Z"
+                                                transform="translate(-54 -64)" fill="#ffc312" />
+                                        </svg>
+
+                                    </li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                            viewBox="0 0 17 17">
+                                            <path id="Star"
+                                                d="M62.5,77.666,67.753,81l-1.39-6.289L71,70.482l-6.113-.552L62.5,64l-2.388,5.929L54,70.482l4.637,4.229L57.247,81Z"
+                                                transform="translate(-54 -64)" fill="#ffc312" />
+                                        </svg>
+
+                                    </li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                            viewBox="0 0 17 17">
+                                            <path id="Star"
+                                                d="M62.5,77.666,67.753,81l-1.39-6.289L71,70.482l-6.113-.552L62.5,64l-2.388,5.929L54,70.482l4.637,4.229L57.247,81Z"
+                                                transform="translate(-54 -64)" fill="#ffc312" />
+                                        </svg>
+
+                                    </li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17"
+                                            viewBox="0 0 17 17">
+                                            <defs>
+                                                <linearGradient id="linear-gradient" x1="0.217" y1="0.569" x2="0.779"
+                                                    y2="0.576" gradientUnits="objectBoundingBox">
+                                                    <stop offset="0" stop-color="#ffc312" />
+                                                    <stop offset="0.506" stop-color="#fec41b" />
+                                                    <stop offset="0.506" stop-color="#e7e1cf" />
+                                                    <stop offset="1" stop-color="#e4e4e4" />
+                                                </linearGradient>
+                                            </defs>
+                                            <path id="Star"
+                                                d="M62.5,77.666,67.753,81l-1.39-6.289L71,70.482l-6.113-.552L62.5,64l-2.388,5.929L54,70.482l4.637,4.229L57.247,81Z"
+                                                transform="translate(-54 -64)" fill="url(#linear-gradient)" />
+                                        </svg>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="s050F_total_review_count_wrapper">
+                                <span class="s050F_total_review_count">164 reviews</span>
+                            </div>
+                        </div>
+
+                        <!-- clinet review area -->
+                        <div class="s050F_client_revire_main_wrapper">
+                            <div class="s050F_client_review_wrapper">
+                                <div class="s050F_client_given_rating_wrapper">
+                                    <ul class="s050F_client_given_rating">
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#dfdfdf" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="s050F_client_name_wrapper">
+                                    <span class="s050F_client_name">By Jhon Doe</span>
+                                </div>
+                                <div class="s050F_client_feedback_wrapper">
+                                    <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti nesciunt,
+                                        dolorum quia inventore laborum cumque, porro temporibus culpa earum voluptatem
+                                        nihil velit ex numquam tempore recusandae? Libero, in sequi. Ipsam.</span>
+                                </div>
+                            </div>
+                            <div class="s050F_client_review_wrapper">
+                                <div class="s050F_client_given_rating_wrapper">
+                                    <ul class="s050F_client_given_rating">
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#dfdfdf" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="s050F_client_name_wrapper">
+                                    <span class="s050F_client_name">By Jhon Doe</span>
+                                </div>
+                                <div class="s050F_client_feedback_wrapper">
+                                    <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti nesciunt,
+                                        dolorum quia inventore laborum cumque, porro temporibus culpa earum voluptatem
+                                        nihil velit ex numquam tempore recusandae? Libero, in sequi. Ipsam.</span>
+                                </div>
+                            </div>
+                            <div class="s050F_client_review_wrapper">
+                                <div class="s050F_client_given_rating_wrapper">
+                                    <ul class="s050F_client_given_rating">
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#dfdfdf" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="s050F_client_name_wrapper">
+                                    <span class="s050F_client_name">By Jhon Doe</span>
+                                </div>
+                                <div class="s050F_client_feedback_wrapper">
+                                    <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti nesciunt,
+                                        dolorum quia inventore laborum cumque, porro temporibus culpa earum voluptatem
+                                        nihil velit ex numquam tempore recusandae? Libero, in sequi. Ipsam.</span>
+                                </div>
+                            </div>
+                            <div class="s050F_client_review_wrapper">
+                                <div class="s050F_client_given_rating_wrapper">
+                                    <ul class="s050F_client_given_rating">
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#dfdfdf" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="s050F_client_name_wrapper">
+                                    <span class="s050F_client_name">By Jhon Doe</span>
+                                </div>
+                                <div class="s050F_client_feedback_wrapper">
+                                    <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti nesciunt,
+                                        dolorum quia inventore laborum cumque, porro temporibus culpa earum voluptatem
+                                        nihil velit ex numquam tempore recusandae? Libero, in sequi. Ipsam.</span>
+                                </div>
+                            </div>
+                            <div class="s050F_client_review_wrapper">
+                                <div class="s050F_client_given_rating_wrapper">
+                                    <ul class="s050F_client_given_rating">
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#dfdfdf" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="s050F_client_name_wrapper">
+                                    <span class="s050F_client_name">By Jhon Doe</span>
+                                </div>
+                                <div class="s050F_client_feedback_wrapper">
+                                    <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti nesciunt,
+                                        dolorum quia inventore laborum cumque, porro temporibus culpa earum voluptatem
+                                        nihil velit ex numquam tempore recusandae? Libero, in sequi. Ipsam.</span>
+                                </div>
+                            </div>
+                            <div class="s050F_client_review_wrapper">
+                                <div class="s050F_client_given_rating_wrapper">
+                                    <ul class="s050F_client_given_rating">
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#dfdfdf" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="s050F_client_name_wrapper">
+                                    <span class="s050F_client_name">By Jhon Doe</span>
+                                </div>
+                                <div class="s050F_client_feedback_wrapper">
+                                    <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti nesciunt,
+                                        dolorum quia inventore laborum cumque, porro temporibus culpa earum voluptatem
+                                        nihil velit ex numquam tempore recusandae? Libero, in sequi. Ipsam.</span>
+                                </div>
+                            </div>
+                            <div class="s050F_client_review_wrapper">
+                                <div class="s050F_client_given_rating_wrapper">
+                                    <ul class="s050F_client_given_rating">
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#dfdfdf" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="s050F_client_name_wrapper">
+                                    <span class="s050F_client_name">By Jhon Doe</span>
+                                </div>
+                                <div class="s050F_client_feedback_wrapper">
+                                    <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti nesciunt,
+                                        dolorum quia inventore laborum cumque, porro temporibus culpa earum voluptatem
+                                        nihil velit ex numquam tempore recusandae? Libero, in sequi. Ipsam.</span>
+                                </div>
+                            </div>
+                            <div class="s050F_client_review_wrapper">
+                                <div class="s050F_client_given_rating_wrapper">
+                                    <ul class="s050F_client_given_rating">
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#dfdfdf" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="s050F_client_name_wrapper">
+                                    <span class="s050F_client_name">By Jhon Doe</span>
+                                </div>
+                                <div class="s050F_client_feedback_wrapper">
+                                    <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti nesciunt,
+                                        dolorum quia inventore laborum cumque, porro temporibus culpa earum voluptatem
+                                        nihil velit ex numquam tempore recusandae? Libero, in sequi. Ipsam.</span>
+                                </div>
+                            </div>
+                            <div class="s050F_client_review_wrapper">
+                                <div class="s050F_client_given_rating_wrapper">
+                                    <ul class="s050F_client_given_rating">
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#ffc312" />
+                                            </svg>
+                                        </li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                viewBox="0 0 13 13">
+                                                <path id="Star"
+                                                    d="M60.5,74.45,64.517,77l-1.063-4.81L67,68.957l-4.674-.422L60.5,64l-1.826,4.534L54,68.957l3.546,3.234L56.483,77Z"
+                                                    transform="translate(-54 -64)" fill="#dfdfdf" />
+                                            </svg>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="s050F_client_name_wrapper">
+                                    <span class="s050F_client_name">By Jhon Doe</span>
+                                </div>
+                                <div class="s050F_client_feedback_wrapper">
+                                    <span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti nesciunt,
+                                        dolorum quia inventore laborum cumque, porro temporibus culpa earum voluptatem
+                                        nihil velit ex numquam tempore recusandae? Libero, in sequi. Ipsam.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- product description section -->
+                    <div class="s050F_product_description_main_wrapper">
+                        <div class="s050F_product_description">
+                            <h4>Product Details</h4>
+                            <span>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos, tempore? Impedit atque
+                                dolore inventore hic consectetur cumque quisquam blanditiis, rem minima corrupti beatae
+                                officia totam iusto velit eligendi corporis quam consequuntur voluptatum, provident
+                                repellat ducimus dolores. Fuga perferendis repellendus facilis odit eius eum aperiam
+                                blanditiis quis aut, fugit ad placeat!
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>
